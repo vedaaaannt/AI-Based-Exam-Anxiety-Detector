@@ -38,7 +38,7 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # ── Activity 7.2 — Connect Frontend to Backend API ───────────
-API_URL = "http://localhost:8000"
+API_URL = "https://ai-based-exam-anxiety-detector-production-1062.up.railway.app"
 
 # Check if the FastAPI backend is reachable
 def check_api_health():
