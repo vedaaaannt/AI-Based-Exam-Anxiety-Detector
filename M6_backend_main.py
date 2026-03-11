@@ -67,21 +67,25 @@ ANXIETY_META = {
 
 # ── Activity 6.2 — Loading the Trained BERT Model ────────────
 # Global model and tokenizer loaded once at startup
-tokenizer_global: Optional[BertTokenizer] = None
+tokenizer_global = None
+model_global = None
 model_global: Optional[BertForSequenceClassification] = None
 
 def load_bert_model():
     global tokenizer_global, model_global
+    if not TORCH_AVAILABLE:
+        logger.warning("torch not installed — running in DEMO mode")
+        return
     try:
+        from transformers import BertTokenizer, BertForSequenceClassification
         logger.info(f"Loading BERT from: {MODEL_DIR}")
         tokenizer_global = BertTokenizer.from_pretrained(MODEL_DIR)
-        model_global     = BertForSequenceClassification.from_pretrained(MODEL_DIR)
+        model_global = BertForSequenceClassification.from_pretrained(MODEL_DIR)
         model_global.to(DEVICE)
-        model_global.eval()   # inference mode — no dropout
+        model_global.eval()
         logger.info(f"Model loaded on {DEVICE}")
     except Exception as e:
         logger.warning(f"Could not load model: {e} — running in DEMO mode")
-
 
 # ── Activity 6.3 — Request & Response Schemas ────────────────
 # Pydantic models enforce types and auto-document the API
