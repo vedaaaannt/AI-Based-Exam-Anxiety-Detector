@@ -38,7 +38,7 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # ── Activity 7.2 — Connect Frontend to Backend API ───────────
-API_URL = "API_URL = "https://web-production-4902b.up.railway.app""
+API_URL = "https://web-production-4902b.up.railway.app"
 
 # Check if the FastAPI backend is reachable
 def check_api_health():
